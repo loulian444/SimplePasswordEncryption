@@ -8,34 +8,51 @@ const numArr = numbers.split(``);
 const charArr = characters.split(``);
 
 const allArr = [...charArr, ...numArr, ...symArr, ...capChar];
+const allArrReversed = allArr.toReversed();
 
-// cypher must be a number between 0 - 87
-const cypher = 87;
-const cypher2 = 1;
+const cypher = `Loulian`;
+const cypher2 = `Lisa`;
 
-const password = `password`;
-const password2 = `?"|~`;
-const password3 = "a";
+const password = `password123!!`;
 
-const createNewPassword = (password, cypher) => {
-  const newPasswordArr = [];
+const useCypher = (cypher, characters) => {
+  const cypherArr = cypher.split(``);
+  const charList = [...characters];
 
-  for (let i = 0; i < password.length; i++) {
-    if (allArr.includes(password[i])) {
-      for (let f = 0; f < allArr.length; f++) {
-        if (allArr[f] === password[i]) {
-          if (f + cypher > allArr.length - 1) {
-            newPasswordArr.push(allArr[f - allArr.length + cypher]);
-          } else {
-            newPasswordArr.push(allArr[f + cypher]);
-          }
-        }
-      }
+  for (let i = 0; i < cypherArr.length; i++) {
+    if (charList.includes(cypherArr[i])) {
+      const index = charList.indexOf(cypherArr[i]);
+      charList.splice(index, 1);
     }
   }
 
-  console.log(newPasswordArr.join(``));
+  const cypherPlusChar = [...cypherArr, ...charList];
+
+  // returns array of cypher and characters without duplicates if applicable
+  return cypherPlusChar.filter(
+    (value, index) => cypherPlusChar.indexOf(value) === index
+  );
 };
 
-createNewPassword(password, cypher);
-createNewPassword(password, cypher2);
+const firstCypherList = useCypher(cypher, allArr);
+const secondCypherList = useCypher(cypher2, allArrReversed);
+
+const encryptPassword = (password, cypherList, reversedCypherList) => {
+  const passwordArr = password.split(``);
+  const scrambledPasswordArr = [];
+
+  for (let i = 0; i < passwordArr.length; i++) {
+    const index = cypherList.indexOf(passwordArr[i]);
+    scrambledPasswordArr.push(reversedCypherList[index]);
+  }
+
+  return scrambledPasswordArr.join(``);
+};
+
+const encryptedPW = encryptPassword(
+  password,
+  firstCypherList,
+  secondCypherList
+);
+
+console.log(encryptedPW);
