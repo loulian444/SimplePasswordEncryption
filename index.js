@@ -10,6 +10,7 @@ const charArr = characters.split(``);
 const allArr = [...charArr, ...numArr, ...symArr, ...capChar];
 const allArrReversed = allArr.toReversed();
 
+// cyphers can be anything and any length
 const cypher = `Loulian`;
 const cypher2 = `Lisa`;
 
@@ -56,3 +57,24 @@ const encryptedPW = encryptPassword(
 );
 
 console.log(encryptedPW);
+
+// just the encrypted password, but doing the reverse
+const decryptPassword = (encryptedPassword, cypherList, reversedCypherList) => {
+  const passwordArr = encryptedPassword.split(``);
+  const unscrambledPasswordArr = [];
+
+  for (let i = 0; i < encryptedPassword.length; i++) {
+    const index = reversedCypherList.indexOf(passwordArr[i]);
+    unscrambledPasswordArr.push(cypherList[index]);
+  }
+
+  return unscrambledPasswordArr.join(``);
+};
+
+const decryptedPW = decryptPassword(
+  encryptedPW,
+  firstCypherList,
+  secondCypherList
+);
+
+console.log(decryptedPW);
