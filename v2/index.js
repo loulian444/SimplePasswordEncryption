@@ -10,7 +10,12 @@ const charArr = characters.split(``);
 const allArr = [...charArr, ...numArr, ...symArr, ...capChar];
 const allArrReversed = allArr.toReversed();
 
-// use this function to create an array of characters using the cyphers. one needs to be normal, the other one reversed
+// cyphers can be anything and any length
+const cypher = `Loulian`;
+const cypher2 = `Lisa`;
+
+const password = `password123!!`;
+
 const useCypher = (cypher, characters) => {
   const cypherArr = cypher.split(``);
   const charList = [...characters];
@@ -30,6 +35,9 @@ const useCypher = (cypher, characters) => {
   );
 };
 
+const firstCypherList = useCypher(cypher, allArr);
+const secondCypherList = useCypher(cypher2, allArrReversed);
+
 const encryptPassword = (password, cypherList, reversedCypherList) => {
   const passwordArr = password.split(``);
   const scrambledPasswordArr = [];
@@ -41,6 +49,14 @@ const encryptPassword = (password, cypherList, reversedCypherList) => {
 
   return scrambledPasswordArr.join(``);
 };
+
+const encryptedPW = encryptPassword(
+  password,
+  firstCypherList,
+  secondCypherList
+);
+
+console.log(encryptedPW);
 
 // just the encrypted password, but doing the reverse
 const decryptPassword = (encryptedPassword, cypherList, reversedCypherList) => {
@@ -54,3 +70,11 @@ const decryptPassword = (encryptedPassword, cypherList, reversedCypherList) => {
 
   return unscrambledPasswordArr.join(``);
 };
+
+const decryptedPW = decryptPassword(
+  encryptedPW,
+  firstCypherList,
+  secondCypherList
+);
+
+console.log(decryptedPW);
