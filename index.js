@@ -7,8 +7,8 @@ const symArr = symbols.split(``);
 const numArr = numbers.split(``);
 const charArr = characters.split(``);
 
-const allArr = [...charArr, ...numArr, ...symArr, ...capChar];
-const allArrReversed = allArr.toReversed();
+export const allCharactersArr = [...charArr, ...numArr, ...symArr, ...capChar];
+export const allCharactersArrReversed = allCharactersArr.toReversed();
 
 // use this function to create an array of characters using the cyphers. one needs to be normal, the other one reversed
 export const useCypher = (cypher, characters) => {
